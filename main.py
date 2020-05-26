@@ -1,4 +1,5 @@
 import math
+import random
 
 
 def checkwin(board):
@@ -108,7 +109,15 @@ def playgame():
                     print("you can't go there...")
         else:
             if count == 0:
-                game[0][0] = ai
+                start = random.randint(0, 3)
+                if start == 0:
+                    game[0][0] = ai
+                elif start == 1:
+                    game[0][2] = ai
+                elif start == 2:
+                    game[2][0] = ai
+                else:
+                    game[2][2] = ai
             else:
                 bestscore = -math. inf
                 for row in range(3):
@@ -139,11 +148,15 @@ def playgame():
     printboard(game)
 
 
-userin = input("first or second: ")
-if userin == "f":
-    human = "x"
-    ai = "o"
-else:
-    human = "o"
-    ai = "x"
-playgame()
+while True:
+    userin = input("first or second: ")
+    if userin == "f":
+        human = "x"
+        ai = "o"
+    else:
+        human = "o"
+        ai = "x"
+    playgame()
+    userin = input("Enter y to play again, anything else to quit: ")
+    if userin != "y":
+        break
